@@ -1,0 +1,22 @@
+plugins {
+    id 'idea'
+}
+
+allprojects {
+    group = 'ru.arslanova'
+    version = '1.0-SNAPSHOT'
+
+    repositories {
+        mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'java'
+
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+}

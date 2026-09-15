@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - include: { file: changelog/001-create-clients.yaml, relativeToChangelogFile: false }
+  - include: { file: changelog/002-create-orders.yaml,  relativeToChangelogFile: false }
+  - include: { file: changelog/003-create-outbox.yaml,  relativeToChangelogFile: false }
+  - include: { file: changelog/004-create-test-drive-applications.yaml, relativeToChangelogFile: false }
+  - include: { file: changelog/005-outbox-trace-and-attempts.yaml, relativeToChangelogFile: false }
+
+  - include: { file: changelog/006-create-managers.yaml, relativeToChangelogFile: false }

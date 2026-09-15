@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-car-models
+      author: arslanova
+      changes:
+        - createTable:
+            tableName: car_models
+            columns:
+              - column: { name: id,            type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: brand,         type: VARCHAR(64) }
+              - column: { name: model,         type: VARCHAR(128), constraints: { nullable: false } }
+              - column: { name: base_price,    type: "DECIMAL(19,2)" }
+              - column: { name: body_type,     type: VARCHAR(64) }
+              - column: { name: fuel_type,     type: VARCHAR(64) }
+              - column: { name: drive_type,    type: VARCHAR(64) }
+              - column: { name: gear_box,      type: VARCHAR(64) }
+              - column: { name: color,         type: VARCHAR(64) }
+              - column: { name: stock_count,   type: int, defaultValueNumeric: 0, constraints: { nullable: false } }
+              - column: { name: created_at,     type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: updated_at,     type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: removed,       type: boolean, defaultValueBoolean: false, constraints: { nullable: false } }

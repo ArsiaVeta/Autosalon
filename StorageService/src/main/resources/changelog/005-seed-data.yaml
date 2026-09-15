@@ -1,0 +1,126 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-seed-parts
+      author: arslanova
+      changes:
+        - insert:
+            tableName: parts
+            columns:
+              - column: { name: id,           value: "11111111-1111-1111-1111-000000000001" }
+              - column: { name: name,         value: "17'' Standard wheel" }
+              - column: { name: type,         value: "WHEEL" }
+              - column: { name: price,        valueNumeric: "0" }
+              - column: { name: stock_count,  valueNumeric: "20" }
+              - column: { name: created_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: updated_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: removed,      valueBoolean: false }
+        - insert:
+            tableName: parts
+            columns:
+              - column: { name: id,           value: "11111111-1111-1111-1111-000000000002" }
+              - column: { name: name,         value: "19'' M-Sport wheel" }
+              - column: { name: type,         value: "WHEEL" }
+              - column: { name: price,        valueNumeric: "95000" }
+              - column: { name: stock_count,  valueNumeric: "5" }
+              - column: { name: created_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: updated_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: removed,      valueBoolean: false }
+        - insert:
+            tableName: parts
+            columns:
+              - column: { name: id,           value: "11111111-1111-1111-1111-000000000003" }
+              - column: { name: name,         value: "Automatic 8AT" }
+              - column: { name: type,         value: "TRANSMISSION" }
+              - column: { name: price,        valueNumeric: "0" }
+              - column: { name: stock_count,  valueNumeric: "10" }
+              - column: { name: created_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: updated_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: removed,      valueBoolean: false }
+        - insert:
+            tableName: parts
+            columns:
+              - column: { name: id,           value: "11111111-1111-1111-1111-000000000004" }
+              - column: { name: name,         value: "Sport leather steering wheel" }
+              - column: { name: type,         value: "STREERING_WHEEL" }
+              - column: { name: price,        valueNumeric: "0" }
+              - column: { name: stock_count,  valueNumeric: "15" }
+              - column: { name: created_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: updated_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: removed,      valueBoolean: false }
+        - insert:
+            tableName: parts
+            columns:
+              - column: { name: id,           value: "11111111-1111-1111-1111-000000000005" }
+              - column: { name: name,         value: "Cloth Graphite interior" }
+              - column: { name: type,         value: "INTERIOR" }
+              - column: { name: price,        valueNumeric: "0" }
+              - column: { name: stock_count,  valueNumeric: "12" }
+              - column: { name: created_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: updated_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: removed,      valueBoolean: false }
+
+  - changeSet:
+      id: 005-seed-car-models
+      author: arslanova
+      changes:
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: id,            value: "22222222-2222-2222-2222-000000000001" }
+              - column: { name: brand,         value: "BMW" }
+              - column: { name: model,         value: "320i" }
+              - column: { name: base_price,    valueNumeric: "3500000" }
+              - column: { name: body_type,     value: "SEDAN" }
+              - column: { name: fuel_type,     value: "PETROL" }
+              - column: { name: drive_type,    value: "REAR" }
+              - column: { name: gear_box,      value: "AUTOMATIC" }
+              - column: { name: color,         value: "BLACK" }
+              - column: { name: stock_count,   valueNumeric: "2" }
+              - column: { name: created_at,    valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: updated_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: removed,       valueBoolean: false }
+        - insert:
+            tableName: car_models
+            columns:
+              - column: { name: id,            value: "22222222-2222-2222-2222-000000000002" }
+              - column: { name: brand,         value: "MERCEDES" }
+              - column: { name: model,         value: "GLE" }
+              - column: { name: base_price,    valueNumeric: "7000000" }
+              - column: { name: body_type,     value: "SUV" }
+              - column: { name: fuel_type,     value: "DIESEL" }
+              - column: { name: drive_type,    value: "ALL" }
+              - column: { name: gear_box,      value: "AUTOMATIC" }
+              - column: { name: color,         value: "WHITE" }
+              - column: { name: stock_count,   valueNumeric: "1" }
+              - column: { name: created_at,    valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: updated_at,   valueComputed: "CURRENT_TIMESTAMP" }
+              - column: { name: removed,       valueBoolean: false }
+
+  - changeSet:
+      id: 005-seed-car-model-components
+      author: arslanova
+      changes:
+        - insert:
+            tableName: car_model_components
+            columns:
+              - column: { name: car_model_id,   value: "22222222-2222-2222-2222-000000000001" }
+              - column: { name: component_type, value: "WHEEL" }
+              - column: { name: part_id,        value: "11111111-1111-1111-1111-000000000001" }
+        - insert:
+            tableName: car_model_components
+            columns:
+              - column: { name: car_model_id,   value: "22222222-2222-2222-2222-000000000001" }
+              - column: { name: component_type, value: "TRANSMISSION" }
+              - column: { name: part_id,        value: "11111111-1111-1111-1111-000000000003" }
+        - insert:
+            tableName: car_model_components
+            columns:
+              - column: { name: car_model_id,   value: "22222222-2222-2222-2222-000000000001" }
+              - column: { name: component_type, value: "STREERING_WHEEL" }
+              - column: { name: part_id,        value: "11111111-1111-1111-1111-000000000004" }
+        - insert:
+            tableName: car_model_components
+            columns:
+              - column: { name: car_model_id,   value: "22222222-2222-2222-2222-000000000001" }
+              - column: { name: component_type, value: "INTERIOR" }
+              - column: { name: part_id,        value: "11111111-1111-1111-1111-000000000005" }

@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-test-drive-applications
+      author: arslanova
+      changes:
+        - createTable:
+            tableName: test_drive_applications
+            columns:
+              - column: { name: id,            type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: client_id,     type: UUID, constraints: { nullable: false } }
+              - column: { name: car_model_id,  type: UUID, constraints: { nullable: false } }
+              - column: { name: start_time,    type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: created_at,     type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: updated_at,     type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: removed,       type: boolean, defaultValueBoolean: false, constraints: { nullable: false } }
+        - createIndex:
+            indexName: idx_test_drive_client_id
+            tableName: test_drive_applications
+            columns:
+              - column: { name: client_id }

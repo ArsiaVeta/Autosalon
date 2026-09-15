@@ -1,0 +1,124 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'io.freefair.lombok' version "9.2.0"
+    id 'org.springframework.boot' version '3.2.0'
+    id 'io.spring.dependency-management' version '1.1.4'
+    id 'com.google.protobuf' version '0.9.4'
+}
+
+group = 'ru.arslanova'
+version = '1.0-SNAPSHOT'
+
+ext {
+    grpcVersion = '1.61.0'
+    protobufVersion = '3.25.1'
+    set('protobuf.version', protobufVersion)
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(17)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+bootJar {
+    enabled = true
+}
+
+jar {
+    enabled = false
+}
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.kafka:spring-kafka'
+
+    implementation "io.grpc:grpc-netty-shaded:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    implementation "com.google.protobuf:protobuf-java:${protobufVersion}"
+    compileOnly 'org.apache.tomcat:annotations-api:6.0.53'
+
+    runtimeOnly 'org.postgresql:postgresql:42.7.4'
+    implementation 'org.liquibase:liquibase-core'
+
+
+    implementation 'org.mapstruct:mapstruct:1.6.3'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+    annotationProcessor 'org.projectlombok:lombok-mapstruct-binding:0.2.0'
+
+
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0'
+
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'org.springframework.kafka:spring-kafka-test'
+
+    testImplementation 'org.testcontainers:junit-jupiter:1.21.4'
+    testImplementation 'org.testcontainers:postgresql:1.21.4'
+    testImplementation 'org.testcontainers:kafka:1.21.4'
+    testImplementation 'org.testcontainers:testcontainers:1.21.4'
+    testImplementation 'com.github.docker-java:docker-java-api:3.4.0'
+    testImplementation 'com.github.docker-java:docker-java-transport-zerodep:3.4.0'
+
+    testImplementation 'org.assertj:assertj-core:3.25.3'
+    testImplementation 'org.awaitility:awaitility:4.2.2'
+
+    testRuntimeOnly 'com.h2database:h2:2.2.224'
+
+    tasks.withType(JavaCompile).configureEach {
+        options.compilerArgs += ['--enable-preview']
+    }
+
+    tasks.withType(Test).configureEach {
+        jvmArgs += ['--enable-preview']
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+
+    environment "DOCKER_HOST", System.getenv("DOCKER_HOST") ?: "tcp://localhost:2375"
+    environment "TESTCONTAINERS_RYUK_DISABLED", "true"
+    environment "TESTCONTAINERS_CHECKS_DISABLE", "true"
+    systemProperty "testcontainers.reuse.enable", "true"
+    systemProperty "testcontainers.ryuk.disabled", "true"
+    systemProperty "docker.host", "tcp://localhost:2375"
+
+    testLogging {
+        events "passed", "skipped", "failed"
+        showExceptions true
+        showStackTraces true
+    }
+}
+
+protobuf {
+    protoc {
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
+    }
+    plugins {
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                grpc {}
+            }
+        }
+    }
+}

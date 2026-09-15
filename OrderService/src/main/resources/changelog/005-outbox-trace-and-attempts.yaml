@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-outbox-add-trace-and-attempts
+      author: arslanova
+      changes:
+        - addColumn:
+            tableName: outbox_events
+            columns:
+              - column: { name: trace_id,   type: VARCHAR(128) }
+              - column: { name: attempts,   type: INT, defaultValueNumeric: 0, constraints: { nullable: false } }
+              - column: { name: last_error, type: TEXT }
+        - createIndex:
+            indexName: idx_outbox_events_processed_attempts
+            tableName: outbox_events
+            columns:
+              - column: { name: processed }
+              - column: { name: attempts }

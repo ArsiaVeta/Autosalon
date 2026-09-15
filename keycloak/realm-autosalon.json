@@ -1,0 +1,132 @@
+{
+  "realm": "autosalon",
+  "enabled": true,
+  "displayName": "Autosalon",
+  "sslRequired": "none",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "accessTokenLifespan": 3600,
+  "ssoSessionIdleTimeout": 7200,
+  "ssoSessionMaxLifespan": 36000,
+  "roles": {
+    "realm": [
+      { "name": "USER", "description": "Клиент автосалона" },
+      { "name": "MANAGER", "description": "Менеджер по продажам" },
+      { "name": "WAREHOUSE_ADMIN", "description": "Администратор склада" },
+      { "name": "ADMIN", "description": "Администратор системы" }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "autosalon-app",
+      "name": "Autosalon API client",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "secret": "autosalon-secret",
+      "bearerOnly": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": true,
+      "serviceAccountsEnabled": true,
+      "fullScopeAllowed": true,
+      "redirectUris": [
+        "http://localhost:*",
+        "https://oauth.pstmn.io/v1/callback",
+        "https://oauth.pstmn.io/v1/browser-callback"
+      ],
+      "webOrigins": ["*"],
+      "attributes": {
+        "access.token.lifespan": "3600"
+      },
+      "defaultClientScopes": [
+        "web-origins",
+        "acr",
+        "profile",
+        "roles",
+        "email"
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "00000000-0000-4000-a000-000000000001",
+      "username": "admin",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "admin@autosalon.local",
+      "firstName": "Admin",
+      "lastName": "Autosalon",
+      "credentials": [
+        { "type": "password", "value": "admin", "temporary": false }
+      ],
+      "realmRoles": ["ADMIN"]
+    },
+    {
+      "id": "00000000-0000-4000-a000-000000000002",
+      "username": "manager",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "manager@autosalon.local",
+      "firstName": "Manager",
+      "lastName": "Autosalon",
+      "credentials": [
+        { "type": "password", "value": "manager", "temporary": false }
+      ],
+      "realmRoles": ["MANAGER"]
+    },
+    {
+      "id": "00000000-0000-4000-a000-000000000005",
+      "username": "manager2",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "manager2@autosalon.local",
+      "firstName": "Petr",
+      "lastName": "Petrov",
+      "credentials": [
+        { "type": "password", "value": "manager2", "temporary": false }
+      ],
+      "realmRoles": ["MANAGER"]
+    },
+    {
+      "id": "00000000-0000-4000-a000-000000000006",
+      "username": "manager3",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "manager3@autosalon.local",
+      "firstName": "Anna",
+      "lastName": "Smirnova",
+      "credentials": [
+        { "type": "password", "value": "manager3", "temporary": false }
+      ],
+      "realmRoles": ["MANAGER"]
+    },
+    {
+      "id": "00000000-0000-4000-a000-000000000003",
+      "username": "warehouse",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "warehouse@autosalon.local",
+      "firstName": "Warehouse",
+      "lastName": "Autosalon",
+      "credentials": [
+        { "type": "password", "value": "warehouse", "temporary": false }
+      ],
+      "realmRoles": ["WAREHOUSE_ADMIN"]
+    },
+    {
+      "id": "00000000-0000-4000-a000-000000000004",
+      "username": "user",
+      "enabled": true,
+      "emailVerified": true,
+      "email": "user@autosalon.local",
+      "firstName": "Ivan",
+      "lastName": "Ivanov",
+      "credentials": [
+        { "type": "password", "value": "user", "temporary": false }
+      ],
+      "realmRoles": ["USER"]
+    }
+  ]
+}

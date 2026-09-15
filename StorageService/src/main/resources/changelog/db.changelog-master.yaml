@@ -1,0 +1,6 @@
+databaseChangeLog:
+  - include: { file: changelog/001-create-car-models.yaml,      relativeToChangelogFile: false }
+  - include: { file: changelog/002-create-parts.yaml,           relativeToChangelogFile: false }
+  - include: { file: changelog/003-create-assembly-orders.yaml, relativeToChangelogFile: false }
+  - include: { file: changelog/004-create-car-model-components.yaml, relativeToChangelogFile: false }
+  - include: { file: changelog/005-seed-data.yaml, relativeToChangelogFile: false }

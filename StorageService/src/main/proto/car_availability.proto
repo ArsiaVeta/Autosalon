@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package autosalon.storage;
+
+option java_multiple_files = true;
+option java_package = "ru.arslanova.grpc.car";
+option java_outer_classname = "CarAvailabilityProto";
+
+service CarAvailabilityService {
+  rpc ListAvailableCars (ListAvailableCarsRequest) returns (ListAvailableCarsResponse);
+  rpc GetAvailableCar (GetAvailableCarRequest) returns (AvailableCar);
+}
+
+message ListAvailableCarsRequest {}
+
+message ListAvailableCarsResponse {
+  repeated AvailableCar cars = 1;
+}
+
+message GetAvailableCarRequest {
+  string id = 1;
+}
+
+message AvailableCar {
+  string id = 1;
+  string brand = 2;
+  string model = 3;
+  string base_price = 4;
+  string body_type = 5;
+  string fuel_type = 6;
+  string drive_type = 7;
+  string gear_box = 8;
+  string color = 9;
+  int32 stock_count = 10;
+}

@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - changeSet:
+      id: 001-create-clients
+      author: arslanova
+      changes:
+        - createTable:
+            tableName: clients
+            columns:
+              - column:
+                  name: id
+                  type: UUID
+                  constraints: { primaryKey: true, nullable: false }
+              - column: { name: first_name,             type: VARCHAR(255), constraints: { nullable: false } }
+              - column: { name: last_name,              type: VARCHAR(255), constraints: { nullable: false } }
+              - column: { name: email,                  type: VARCHAR(255), constraints: { nullable: false } }
+              - column: { name: phone_number,           type: VARCHAR(64), constraints: { nullable: false, unique: true } }
+              - column: { name: date_of_birth,          type: date, constraints: { nullable: false } }
+              - column: { name: driver_license_number,  type: VARCHAR(255) }
+              - column: { name: created_at,              type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: updated_at,              type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+              - column: { name: removed,                type: boolean, defaultValueBoolean: false, constraints: { nullable: false } }

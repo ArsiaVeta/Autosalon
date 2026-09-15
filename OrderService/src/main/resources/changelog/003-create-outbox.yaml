@@ -1,0 +1,29 @@
+databaseChangeLog:
+  - changeSet:
+      id: 003-create-outbox
+      author: arslanova
+      changes:
+        - createTable:
+            tableName: outbox_events
+            columns:
+              - column: { name: id,            type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: aggregate_id,  type: UUID, constraints: { nullable: false } }
+              - column: { name: event_type,    type: VARCHAR(128), constraints: { nullable: false } }
+              - column: { name: payload,       type: TEXT, constraints: { nullable: false } }
+              - column: { name: processed,     type: boolean, defaultValueBoolean: false, constraints: { nullable: false } }
+              - column: { name: created_at,    type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
+        - createIndex:
+            indexName: idx_outbox_events_processed
+            tableName: outbox_events
+            columns:
+              - column: { name: processed }
+
+  - changeSet:
+      id: 003-create-processed-messages
+      author: arslanova
+      changes:
+        - createTable:
+            tableName: processed_messages
+            columns:
+              - column: { name: event_id,     type: UUID, constraints: { primaryKey: true, nullable: false } }
+              - column: { name: processed_at, type: TIMESTAMP WITH TIME ZONE, constraints: { nullable: false } }
